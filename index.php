@@ -1,3 +1,16 @@
+<?php
+/*
+ * =============================================
+ * ARQUIVO: index.php
+ * FUNÇÃO: Menu principal do sistema
+ * =============================================
+ *
+ * Primeira página após o login.
+ * valida_sessao.php garante que apenas usuários
+ * logados chegam até aqui.
+ */
+include('valida_sessao.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,23 +23,26 @@
 <body>
 <div class="container">
 
-    <!-- Botão de sair alinhado à direita (na Fase 2 vira link para logout.php) -->
+    <!-- Botão de sair alinhado à direita -->
     <div class="topbar">
-        <a href="login.html" class="btn-back">🚪 Sair</a>
+        <a href="logout.php" class="btn-back">🚪 Sair</a>
     </div>
 
     <!-- Cabeçalho de boas-vindas -->
     <div class="page-header">
         <h1>🎵 Sistema Musical</h1>
-        <!-- "admin" é fixo aqui. Na Fase 2 vira <?php echo $_SESSION['usuario']; ?> -->
-        <p>Olá, <strong>admin</strong>! O que deseja fazer?</p>
+        <!--
+            $_SESSION['usuario'] contém o nome salvo no login.
+            htmlspecialchars() protege contra XSS na exibição.
+        -->
+        <p>Olá, <strong><?php echo htmlspecialchars($_SESSION['usuario']); ?></strong>! O que deseja fazer?</p>
     </div>
 
     <!-- Grade de cards do menu -->
     <div class="menu-grid">
 
         <div class="menu-card">
-            <a href="cadastro_artista.html">
+            <a href="cadastro_artista.php">
                 <div class="menu-card-icon">🎤</div>
                 <div class="menu-card-title">Gerenciar Artistas</div>
                 <div class="menu-card-desc">Cadastre e edite artistas</div>
@@ -34,7 +50,7 @@
         </div>
 
         <div class="menu-card">
-            <a href="cadastro_musica.html">
+            <a href="cadastro_musica.php">
                 <div class="menu-card-icon">🎵</div>
                 <div class="menu-card-title">Cadastrar Músicas</div>
                 <div class="menu-card-desc">Adicione músicas ao sistema</div>
@@ -42,7 +58,7 @@
         </div>
 
         <div class="menu-card">
-            <a href="listagem_musicas.html">
+            <a href="listagem_musicas.php">
                 <div class="menu-card-icon">🎼</div>
                 <div class="menu-card-title">Biblioteca Musical</div>
                 <div class="menu-card-desc">Visualize e filtre todas as músicas</div>
